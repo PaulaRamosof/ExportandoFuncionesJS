@@ -30,3 +30,15 @@ export function aplicarImpuestos(total) {
 export function aplicarDescuento(total) {
   return total - (total * DESCUENTO);
 }
+
+import { ROLES } from './03usuariosConstantes.js';
+
+export function aplicarDescuentoPorRol(total, usuario) {
+  if (usuario.rol === ROLES.ADMIN) {
+    return total * 0.8; // 20% de descuento
+  } else if (usuario.rol === ROLES.CLIENTE) {
+    return total * (1 - DESCUENTO); // Usa valor de DESCUENTO (ej. 0.1 = 10%)
+  } else {
+    return total; // Sin descuento
+  }
+}

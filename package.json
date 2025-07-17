@@ -1,0 +1,25 @@
+{
+  "name": "laboratorioexportandofuncionesjs",
+  "version": "1.0.0",
+  "type": "module",
+  "main":"00main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulaRamosof/ExportandoFuncionesJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulaRamosof/ExportandoFuncionesJS/issues"
+  },
+  "homepage": "https://github.com/PaulaRamosof/ExportandoFuncionesJS#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "validator": "^13.15.15"
+  },
+  "description": ""
+}

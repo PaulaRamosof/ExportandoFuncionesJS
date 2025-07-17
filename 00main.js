@@ -1,46 +1,90 @@
-// //todo - Ejercicio 1:
-import { PI,IVA,DIAS_SEMANA } from './02constantes.js';
+// Ejercicio 1: Constantes y cálculos básicos
+import { PI, IVA, DIAS_SEMANA, DESCUENTO } from './02constantes.js';
 
-// Área de un círculo con radio 5
+console.log('--- EJERCICIO 1: CONSTANTES ---');
 const radio = 5;
-const areaCirculo = PI * radio**2;
-console.log(`Área del círculo: ${areaCirculo}`);
+const area = PI * radio ** 2;
+console.log('Área del círculo (r=5):', area);
 
-// Precio con IVA de un producto de $100
-const precioBase = 100;
-const precioConIVA = precioBase + (precioBase * IVA);
-console.log(`Precio con IVA: ${precioConIVA}`);
+const precioProducto = 100;
+const precioConIva = precioProducto * (1 + IVA);
+console.log('Precio con IVA (100):', precioConIva);
 
-// Mostrar el tercer día de la semana
-console.log(`El tercer día de la semana es: ${DIAS_SEMANA[2]}`);
+console.log('Tercer día de la semana:', DIAS_SEMANA[2]);
 
-//todo - Ejercicio 2:
-import { sumar, restar, multiplicar, areaCirculo as calcularArea } from './01operaciones-matematicas.js';
 
-console.log(`Suma: ${sumar(5, 3)}`);                // 8
-console.log(`Resta: ${restar(10, 4)}`);             // 6
-console.log(`Multiplicación: ${multiplicar(6, 7)}`); // 42
-console.log(`Área del círculo (radio 4): ${calcularArea(4)}`); // ≈ 50.2656
+// Ejercicio 2: Funciones matemáticas básicas
+import {
+  sumar,
+  restar,
+  multiplicar,
+  areaCirculo
+} from './01operaciones-matematicas.js';
 
-//todo - Ejercicio 3 :
-// Paso 1: calcular total sin impuestos ni descuentos
+console.log('\n--- EJERCICIO 2: FUNCIONES MATEMÁTICAS ---');
+console.log('Suma (3 + 4):', sumar(3, 4));
+console.log('Resta (10 - 6):', restar(10, 6));
+console.log('Multiplicación (2 * 5):', multiplicar(2, 5));
+console.log('Área con función (r=5):', areaCirculo(5));
 
-//todo - Ejercicio 3:
-import { calcularTotal, aplicarImpuestos, aplicarDescuento } from './01operaciones-matematicas.js';
-import { DESCUENTO } from './02constantes.js'; // Ya tengo IVA importado en Ejercicio 1, así que solo traemos lo que falta
 
-// Datos base
-const precioUnitario = 120;
+// Ejercicio 3: Calculadora de impuestos y descuento
+import {
+  calcularTotal,
+  aplicarImpuestos,
+  aplicarDescuento
+} from './01operaciones-matematicas.js';
+
+console.log('\n--- EJERCICIO 3: IMPUESTOS Y DESCUENTO ---');
+const precio = 100;
 const cantidad = 3;
+const subtotal = calcularTotal(cantidad, precio);
+const totalImpuestos = aplicarImpuestos(subtotal);
+const totalFinal = aplicarDescuento(totalImpuestos);
 
-// Paso 1: calcular el total sin impuestos ni descuentos
-const totalSinImpuestos = calcularTotal(precioUnitario, cantidad);
-console.log(`Total sin impuestos: $${totalSinImpuestos}`);
+console.log('Subtotal (3 x 100):', subtotal);
+console.log('Con impuestos (19%):', totalImpuestos);
+console.log('Con descuento (10%):', totalFinal);
 
-// Paso 2: aplicar impuestos
-const totalConIVA = aplicarImpuestos(totalSinImpuestos);
-console.log(`Total con IVA: $${totalConIVA}`);
 
-// Paso 3: aplicar descuento
-const totalFinal = aplicarDescuento(totalConIVA);
-console.log(`noTotal con descuento (${DESCUENTO * 100}%): $${totalFinal}`);
+// Ejercicio 4: Gestión de usuarios
+import { ROLES } from './03usuariosConstantes.js';
+import { crearUsuario, esAdmin } from './04usuarios.js';
+
+console.log('\n--- EJERCICIO 4: USUARIOS ---');
+const usuario1 = crearUsuario('Pedro', ROLES.ADMIN);
+const usuario2 = crearUsuario('Carlos', ROLES.CLIENTE);
+
+console.log(' Usuario 1:', usuario1);
+console.log(' Usuario 2:', usuario2);
+
+console.log(`¿${usuario1.nombre} es admin?`, esAdmin(usuario1));
+console.log(`¿${usuario2.nombre} es admin?`, esAdmin(usuario2));
+
+
+// Ejercicio 5: Sistema de descuentos por rol
+import { aplicarDescuentoPorRol } from './01operaciones-matematicas.js';
+
+console.log('\n--- EJERCICIO 5: DESCUENTO POR ROL ---');
+const admin = crearUsuario('Pedro', ROLES.ADMIN);
+const cliente = crearUsuario('Carlos', ROLES.CLIENTE);
+
+// ADMIN: 4 productos a 25
+const subtotalAdmin = calcularTotal(4, 25);
+const impuestosAdmin = aplicarImpuestos(subtotalAdmin);
+const totalAdmin = aplicarDescuentoPorRol(impuestosAdmin, admin);
+
+// CLIENTE: 3 productos a 50
+const subtotalCliente = calcularTotal(3, 50);
+const impuestosCliente = aplicarImpuestos(subtotalCliente);
+const totalCliente = aplicarDescuentoPorRol(impuestosCliente, cliente);
+
+console.log('\n--- ADMIN PEDRO ---');
+console.log('Subtotal:', subtotalAdmin);
+console.log('Con impuestos:', impuestosAdmin);
+console.log('Total con descuento:', totalAdmin);
+
+console.log('\n--- CLIENTE CARLOS ---');
+console.log('Subtotal:', subtotalCliente);
+console.log('Con impuestos:', impuestosCliente);
+console.log('Total con descuento:', totalCliente);
